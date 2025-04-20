@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cookie Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    #cookieDisplay {
+      margin-top: 20px;
+      color: green;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <h2>Welcome to the Cookie Page</h2>
+
+  <div id="cookiePrompt">
+    <label for="username">Enter your name to set a cookie:</label>
+    <input type="text" id="username">
+    <button onclick="setCookie()">Submit</button>
+  </div>
+
+  <div id="cookieDisplay"></div>
+
+  <footer>
+    &copy; 2025 - Heni Patel - Assignment A10 Due: April 20, 2025
+  </footer>
+
+  <script>
+    function setCookie() {
+      const name = document.getElementById("username").value;
+      if (name) {
+        document.cookie = "username=" + name + "; path=/";
+        displayCookie();
+      }
+    }
+
+    function getCookieValue(name) {
+      const cookieArr = document.cookie.split("; ");
+      for (let i = 0; i < cookieArr.length; i++) {
+        const pair = cookieArr[i].split("=");
+        if (pair[0] === name) return pair[1];
+      }
+      return "";
+    }
+
+    function displayCookie() {
+      const user = getCookieValue("username");
+      if (user) {
+        document.getElementById("cookieDisplay").innerText =
+          "Welcome back, " + user + "!";
+        document.getElementById("cookiePrompt").style.display = "none";
+      }
+    }
+
+    window.onload = displayCookie;
+  </script>
+</body>
+</html>
